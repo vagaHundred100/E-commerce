@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ECommerceApp.Domain.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceApp.Domain.Entities
 {
     public class AppRole : IdentityRole<int>
     {
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }
