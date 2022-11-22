@@ -5,4 +5,8 @@
     <RootNamespace>E_CommerceApp</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ECommerceApp.Services\ECommerceApp.Services.csproj" />
+  </ItemGroup>
+
 </Project>
