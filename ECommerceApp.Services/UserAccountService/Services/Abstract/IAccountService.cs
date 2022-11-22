@@ -10,7 +10,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
         Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel);
         //Task<DataResult<LoginedUserDTO>> Login(LoginDTO loginData);
         //DataResult<List<UserDropDownDTO>> AllUsersForDropDown();
-        //PagedDataResult<List<UserDropDownDTO>> AllUsersForDropDownPaged(PaginationSettings paginationSettings);
+        //PagedDataResult<List<UserDropDownDTO>> AllUsersForDropDownPaged(PaginationSettings paginationSettings); // all users
         //PagedDataResult<List<UserViewDTO>> AllUsers(PaginationSettings paginationSettings);
         //PagedDataResult<List<RoleViewDTO>> AllRoles(PaginationSettings paginationSettings);
         //PagedDataResult<List<RoleDropDownDTO>> AllRolesForDropDownPaged(PaginationSettings paginationSettings);
