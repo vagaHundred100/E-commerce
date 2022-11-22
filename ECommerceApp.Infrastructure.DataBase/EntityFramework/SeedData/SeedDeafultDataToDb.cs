@@ -13,7 +13,7 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.SeedData
         {
             new AppRole {Id = 1, Name = "ADMIN", NormalizedName = "ADMIN"}        
         };
-        private static List<AppUser> usersQms = new List<AppUser>()
+        private static List<AppUser> eCommerceUser = new List<AppUser>()
         {
             new AppUser
             {
@@ -48,7 +48,7 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.SeedData
         {
           
             modelBuilder.Entity<AppRole>().HasData(qmsIdentityRoles);
-            modelBuilder.Entity<AppUser>().HasData(usersQms);
+            modelBuilder.Entity<AppUser>().HasData(eCommerceUser);
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(IdentityUserRoles);       
         }
     }
