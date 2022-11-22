@@ -28,7 +28,6 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
       
         public async Task<DefaultResult> ResetPassword(UserResetPasswordDTO userChangePasswordDTO)
         {
@@ -61,57 +60,46 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             }
             return new DefaultResult();
         }
-
         public Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> DeactivateUser(int userId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> ActivateUser(int userId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> DeactivateRole(int roleId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> AssignUserToRole(int userId, int roleId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> AssignUserToRoles(int userId, List<int> roleIds)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> UpdateUserRoles(int userId, List<int> roleIds)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> SelectApplicationLanguage(int userId, int appLangId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> RemoveUserFromRole(int userId, int roleId)
         {
             throw new System.NotImplementedException();
         }
-
         public async Task<DefaultResult> CreateRole(string roleName)
         {
             throw new System.NotImplementedException();
         }
-
         public DataResult<List<KeyValuePair<string, int>>> UserTypes()
         {
             throw new System.NotImplementedException();
