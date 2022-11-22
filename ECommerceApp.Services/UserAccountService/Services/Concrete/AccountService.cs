@@ -104,5 +104,9 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
         {
             throw new System.NotImplementedException();
         }
+        public PagedDataResult<List<UsersDTO>> AllUsers(PaginationSettings paginationSettings)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
