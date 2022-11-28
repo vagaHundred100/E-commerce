@@ -8,7 +8,9 @@ using ECommerceApp.Shared.SharedRequestResults.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ECommerceApp.Services.UserAccountService.Services.Concrete
@@ -62,39 +64,140 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             return new DefaultResult();
         }
 
-        public Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel)
+        public async Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel)
         {
-            throw new System.NotImplementedException();
+            var user = new AppUser();
+
+            user = _mapper.Map<UserCreateDTO, AppUser>(userRegisterViewModel, user);
+            var result = await _userManager.CreateAsync(user, userRegisterViewModel.Password);
+
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> DeactivateUser(int userId)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            user.Status = EntityStatus.Inactive;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> ActivateUser(int userId)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            user.Status = EntityStatus.Active;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> DeactivateRole(int roleId)
         {
-            throw new System.NotImplementedException();
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+
+            if (role == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            role.Status = EntityStatus.Inactive;
+
+            var result = await _roleManager.UpdateAsync(role);
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+            return new DefaultResult();
+
         }
 
         public async Task<DefaultResult> AssignUserToRole(int userId, int roleId)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            var result = await _userManager.AddToRoleAsync(user, roleId.ToString());
+
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> AssignUserToRoles(int userId, List<int> roleIds)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            foreach (var roleId in roleIds)
+            {
+                var result = await _userManager.AddToRoleAsync(user, roleId.ToString());
+                if (!result.Succeeded)
+                {
+                    return new DefaultResult(result.Succeeded);
+                }
+            }
+
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> UpdateUserRoles(int userId, List<int> roleIds)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            foreach (var roleId in roleIds)
+            {
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+                var result = await _roleManager.UpdateAsync(role);
+
+                if (!result.Succeeded)
+                {
+                    return new DefaultResult(result.Succeeded);
+                }
+            }
+
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> SelectApplicationLanguage(int userId, int appLangId)
@@ -104,12 +207,34 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
 
         public async Task<DefaultResult> RemoveUserFromRole(int userId, int roleId)
         {
-            throw new System.NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                return new DefaultResult(false);
+            }
+
+            var result = await _userManager.RemoveFromRoleAsync(user, roleId.ToString());
+
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+
+            return new DefaultResult();
         }
 
         public async Task<DefaultResult> CreateRole(string roleName)
         {
-            throw new System.NotImplementedException();
+            AppRole role = new AppRole();
+            role.Name = roleName;
+            var result = await _roleManager.CreateAsync(role);
+
+            if (!result.Succeeded)
+            {
+                return new DefaultResult(result.Succeeded);
+            }
+            return new DefaultResult();
         }
 
         public DataResult<List<KeyValuePair<string, int>>> UserTypes()

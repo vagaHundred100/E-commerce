@@ -11,7 +11,7 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext
         {
             //Database.Migrate();
             //Database.EnsureDeleted();   // удаляем бд со старой схемой
-            Database.EnsureCreated();   // создаем бд с новой схемой
+            //Database.EnsureCreated();   // создаем бд с новой схемой
         }
 
         #region DbSet's

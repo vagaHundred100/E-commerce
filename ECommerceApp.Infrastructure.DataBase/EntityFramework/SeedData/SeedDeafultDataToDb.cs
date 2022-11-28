@@ -29,19 +29,7 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.SeedData
         };
         private static List<IdentityUserRole<int>> IdentityUserRoles = new List<IdentityUserRole<int>>()
         {
-            new IdentityUserRole<int>{ RoleId= 1, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 2, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 3, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 4, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 5, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 6, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 7, UserId= 1 },
-            new IdentityUserRole<int>{ RoleId= 2, UserId= 2 },
-            new IdentityUserRole<int>{ RoleId= 3, UserId= 3 },
-            new IdentityUserRole<int>{ RoleId= 4, UserId= 4 },
-            new IdentityUserRole<int>{ RoleId= 5, UserId= 5 },
-            new IdentityUserRole<int>{ RoleId= 6, UserId= 6 },
-            new IdentityUserRole<int>{ RoleId= 7, UserId= 7 },
+            new IdentityUserRole<int>{ RoleId= 1, UserId= 1 }
         };
        
         public static void SeedDeafultData(this ModelBuilder modelBuilder)

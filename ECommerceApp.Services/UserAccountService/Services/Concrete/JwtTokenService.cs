@@ -19,13 +19,13 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             List<Claim> claims = new List<Claim>
                                             {
                                                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                                                new Claim(ClaimTypes.Name, user.UserName),
+                                                new Claim(System.Security.Claims.ClaimTypes.Name, user.UserName),
                                                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                                                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                                                new Claim(QmsClaimTypes.UserAppLangId, user.AppLangId.ToString())
+                                                new Claim(System.Security.Claims.ClaimTypes.NameIdentifier, user.Id.ToString()),
+                                                new Claim(Identity.Constants.ClaimTypes.UserAppLangId, user.AppLangId.ToString())
                                             };
 
-            IEnumerable<Claim> roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r));
+            IEnumerable<Claim> roleClaims = roles.Select(r => new Claim(System.Security.Claims.ClaimTypes.Role, r));
             claims.AddRange(roleClaims);
 
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));

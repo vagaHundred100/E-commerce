@@ -1,10 +1,14 @@
+using ECommerceApp.Domain.Entities;
+using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +27,13 @@ namespace E_CommerceApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            string conn = Configuration.GetConnectionString("Default");
+            services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn,
+                     b => b.MigrationsAssembly("E-CommerceApp")));
+
+            services.AddIdentity<AppUser, AppRole>()
+                    .AddEntityFrameworkStores<EFIdentityContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

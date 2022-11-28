@@ -1,6 +1,6 @@
 ﻿namespace ECommerceApp.Services.UserAccountService.Identity.Constants
 {
-    public static class QmsClaimTypes
+    public static class ClaimTypes
     {
         public const string UserAppLangId = "QmsCustomClaimTypes/UserAppLangId";
     }
