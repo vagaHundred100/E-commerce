@@ -29,11 +29,8 @@ namespace E_CommerceApp
             services.AddControllersWithViews();
 
             string conn = Configuration.GetConnectionString("Default");
-            services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn,
-                     b => b.MigrationsAssembly("E-CommerceApp")));
-
-            services.AddIdentity<AppUser, AppRole>()
-                    .AddEntityFrameworkStores<EFIdentityContext>();
+            services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn, b => b.MigrationsAssembly("E-CommerceApp")));
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<EFIdentityContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
