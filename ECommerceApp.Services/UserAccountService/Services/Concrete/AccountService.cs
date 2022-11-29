@@ -67,7 +67,6 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
         public async Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel)
         {
             var user = new AppUser();
-
             user = _mapper.Map<UserCreateDTO, AppUser>(userRegisterViewModel, user);
             var result = await _userManager.CreateAsync(user, userRegisterViewModel.Password);
 
@@ -75,7 +74,6 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             {
                 return new DefaultResult(result.Succeeded);
             }
-
             return new DefaultResult();
         }
 
