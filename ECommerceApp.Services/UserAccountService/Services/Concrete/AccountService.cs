@@ -239,5 +239,39 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
         {
             throw new System.NotImplementedException();
         }
+
+        public PagedDataResult<List<UserViewDTO>> AllUsers(PaginationSettings paginationSettings)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<DataResult<string>> Login(LoginDTO loginData)
+        {
+            var user = await _userManager.FindByNameAsync(loginData.UserName);
+
+            if(user == null)
+            {
+                var result = new DataResult<string>(null);
+                result.Message = "User with such login does not exist";
+                return result;
+            }
+
+            var isSucceded = await _userManager.CheckPasswordAsync(user, loginData.Password);
+
+            if (isSucceded == false)
+            {
+                DataResult<string> result = new DataResult<string>(null);
+                result.Succeeded = false;
+                result.Message = "Passward or login was incorect";
+                return result;
+            }
+            else 
+            {
+                var userClaimOptions = _mapper.Map<UserClaimsOptions>(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                return _jwtTokenService.GenerateJwt(userClaimOptions,roles,_jwtOptions);
+            }
+
+        }
     }
 }

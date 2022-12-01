@@ -1,5 +1,9 @@
+using E_CommerceApp.JwtSetup;
 using ECommerceApp.Domain.Entities;
 using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext;
+using ECommerceApp.Services.UserAccountService.Identity.Concrete;
+using ECommerceApp.Services.UserAccountService.Services.Abstract;
+using ECommerceApp.Services.UserAccountService.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +35,13 @@ namespace E_CommerceApp
             string conn = Configuration.GetConnectionString("Default");
             services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn, b => b.MigrationsAssembly("E-CommerceApp")));
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<EFIdentityContext>();
+
+            services.Configure<JwtOptions>(Configuration.GetSection("JWTOptions"));
+            JwtOptions jwtSettings = Configuration.GetSection("JWTOptions").Get<JwtOptions>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AuthenticationJwtSettings(jwtSettings);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
