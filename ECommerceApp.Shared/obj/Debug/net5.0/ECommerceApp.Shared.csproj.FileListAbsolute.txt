@@ -1,0 +1,15 @@
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\bin\Debug\net5.0\ECommerceApp.Shared.deps.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\bin\Debug\net5.0\ECommerceApp.Shared.runtimeconfig.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\bin\Debug\net5.0\ECommerceApp.Shared.runtimeconfig.dev.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\bin\Debug\net5.0\ECommerceApp.Shared.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\bin\Debug\net5.0\ECommerceApp.Shared.pdb
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.csproj.AssemblyReference.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.AssemblyInfoInputs.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.AssemblyInfo.cs
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.csproj.CoreCompileInputs.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\refint\ECommerceApp.Shared.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.pdb
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ECommerceApp.Shared.genruntimeconfig.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Shared\obj\Debug\net5.0\ref\ECommerceApp.Shared.dll

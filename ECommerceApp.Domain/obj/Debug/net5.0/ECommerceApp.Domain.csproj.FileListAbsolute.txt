@@ -1,0 +1,15 @@
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\bin\Debug\net5.0\ECommerceApp.Domain.deps.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\bin\Debug\net5.0\ECommerceApp.Domain.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\bin\Debug\net5.0\ECommerceApp.Domain.pdb
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.csproj.AssemblyReference.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.AssemblyInfoInputs.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.AssemblyInfo.cs
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\refint\ECommerceApp.Domain.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.pdb
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ref\ECommerceApp.Domain.dll
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\bin\Debug\net5.0\ECommerceApp.Domain.runtimeconfig.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\bin\Debug\net5.0\ECommerceApp.Domain.runtimeconfig.dev.json
+C:\Users\vagaH\source\repos\E-commerce\ECommerceApp.Domain\obj\Debug\net5.0\ECommerceApp.Domain.genruntimeconfig.cache
