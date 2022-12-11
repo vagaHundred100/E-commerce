@@ -57,30 +57,6 @@ public class AccountController : Controller
         return BadRequest();
     }
 
-    [HttpPost("Deactivate")]
-    public async Task<IActionResult> Deactivate(int Id)
-    {
-        if (ModelState.IsValid)
-        {
-            var response = await _accountService.DeactivateUser(Id);
-            return StatusCode(200, response);
-        }
-
-        return BadRequest();
-    }
-
-    [HttpPost("Activate")]
-    public async Task<IActionResult> Activate(int Id)
-    {
-        if (ModelState.IsValid)
-        {
-            var response = await _accountService.ActivateUser(Id);
-            return StatusCode(200, response);
-
-        }
-
-        return BadRequest();
-    }
 
     [AllowAnonymous]
     [HttpPost("Register")]

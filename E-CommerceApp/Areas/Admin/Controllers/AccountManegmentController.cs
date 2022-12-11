@@ -1,12 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerceApp.Services.UserAccountService.DTOs;
+using ECommerceApp.Services.UserAccountService.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Threading.Tasks;
 
-namespace E_CommerceApp.Areas.Admin.Controllers
+
+[Authorize(Roles = "Admin")]
+[ApiController]
+[Route("[controller]")]
+public class AccountManegmentController : Controller
 {
-    public class AccountManegmentController : Controller
+    private readonly IAccountService _accountService;
+
+    public AccountManegmentController(IAccountService service)
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        _accountService = service;
     }
+
 }
+
+
+
