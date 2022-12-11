@@ -36,8 +36,8 @@ namespace E_CommerceApp
             services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn, b => b.MigrationsAssembly("E-CommerceApp")));
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<EFIdentityContext>();
 
-            services.Configure<JwtOptions>(Configuration.GetSection("JWTOptions"));
-            JwtOptions jwtSettings = Configuration.GetSection("JWTOptions").Get<JwtOptions>();
+            services.Configure<JwtOptions>(Configuration.GetSection("JwtOptions"));
+            JwtOptions jwtSettings = Configuration.GetSection("JwtOptions").Get<JwtOptions>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AuthenticationJwtSettings(jwtSettings);
@@ -65,7 +65,7 @@ namespace E_CommerceApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

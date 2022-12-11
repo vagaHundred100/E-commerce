@@ -22,7 +22,8 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.SeedData
                 Status = EntityStatus.Active,
                 Email = "ECommerceApp@ECommerceApp.net",
                 NormalizedEmail = "qms@bestcomp.net",
-                EmailConfirmed = false,             
+                EmailConfirmed = false,
+                NormalizedUserName = "ADMIN",
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admin777"),
                 SecurityStamp = string.Empty,
             }

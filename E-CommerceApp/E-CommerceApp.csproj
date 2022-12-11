@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\NewFolder\**" />
+    <Content Remove="Areas\Admin\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\Admin\NewFolder\**" />
+    <None Remove="Areas\Admin\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
@@ -21,6 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ECommerceApp.Infrastructure.DataBase\ECommerceApp.Infrastructure.DataBase.csproj" />
     <ProjectReference Include="..\ECommerceApp.Services\ECommerceApp.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controller\" />
   </ItemGroup>
 
 </Project>
