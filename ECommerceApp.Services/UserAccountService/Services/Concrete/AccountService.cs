@@ -4,7 +4,9 @@ using ECommerceApp.Domain.Enums;
 using ECommerceApp.Services.UserAccountService.DTOs;
 using ECommerceApp.Services.UserAccountService.Identity.Concrete;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
+using ECommerceApp.Shared.HelperExtentionMethods;
 using ECommerceApp.Shared.SharedRequestResults.Base;
+using ECommerceApp.Shared.SharedRequestResults.SharedEnum;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,7 +33,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             _roleManager = roleManager;
         }
 
-      
+
         public async Task<DefaultResult> ResetPassword(UserResetPasswordDTO userChangePasswordDTO)
         {
             IdentityResult? result = null;
@@ -240,16 +242,35 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             throw new System.NotImplementedException();
         }
 
-        public PagedDataResult<List<UserViewDTO>> AllUsers(PaginationSettings paginationSettings)
+        public PagedDataResult<List<UserViewDTO>> AllUsers(PaginationSettings settings)
         {
-            throw new System.NotImplementedException();
+
+            var userDTOs = _userManager.Users
+                   .Skip((settings.PageNumber - 1) * settings.PageSize)
+                   .Take(settings.PageSize)
+                   .Select(u =>
+                         new UserViewDTO
+                         {
+                             UserName = u.UserName,
+                             FirstName = u.FirstName,
+                             LastName = u.LastName,
+                             Email = u.Email
+                         })
+                   .AsEnumerable()
+                   .OrderByPropertyName(settings.SortField, settings.OrderMethod)
+                   .ToList();
+
+
+            var count = userDTOs.Count();
+            return new PagedDataResult<List<UserViewDTO>>(
+                       userDTOs, settings.PageNumber, settings.PageSize, count);
         }
 
         public async Task<DataResult<string>> Login(LoginDTO loginData)
         {
             var user = await _userManager.FindByNameAsync(loginData.UserName);
 
-            if(user == null)
+            if (user == null)
             {
                 var result = new DataResult<string>(null);
                 result.Message = "User with such login does not exist";
@@ -265,11 +286,11 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                 result.Message = "Passward or login was incorect";
                 return result;
             }
-            else 
+            else
             {
                 var userClaimOptions = _mapper.Map<UserClaimsOptions>(user);
                 var roles = await _userManager.GetRolesAsync(user);
-                return _jwtTokenService.GenerateJwt(userClaimOptions,roles,_jwtOptions);
+                return _jwtTokenService.GenerateJwt(userClaimOptions, roles, _jwtOptions);
             }
 
         }
