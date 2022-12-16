@@ -23,9 +23,6 @@ namespace ECommerceApp.Shared.HelperExtentionMethods
             {
                 return source.OrderBy(x => prop.GetValue(x, null));
             }
-            
         }
-
-
     }
 }
