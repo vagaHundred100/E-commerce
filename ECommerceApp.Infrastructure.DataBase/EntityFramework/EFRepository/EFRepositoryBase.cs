@@ -20,6 +20,8 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository
             repositoryContextBase = applicationIdentityContext;
         }
 
+       
+
         #region Synchronous methods
         public TEntity FindById(int Id)
         {

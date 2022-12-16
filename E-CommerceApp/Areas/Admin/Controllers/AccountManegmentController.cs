@@ -84,7 +84,7 @@ public class AccountManegmentController : Controller
 
         if (ModelState.IsValid)
         {
-            var response =  _accountService.AllUsers(settings);
+            var response = _accountService.AllUsers(settings);
             return StatusCode(200, response);
         }
 

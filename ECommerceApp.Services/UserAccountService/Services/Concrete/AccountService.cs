@@ -273,7 +273,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             if (user == null)
             {
                 var result = new DataResult<string>(null);
-                result.Message = "User with such login does not exist";
+                result.Message = "User with such login does not exist"; // magic strings 
                 return result;
             }
 
