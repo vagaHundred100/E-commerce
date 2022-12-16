@@ -1,6 +1,9 @@
 using E_CommerceApp.JwtSetup;
 using ECommerceApp.Domain.Entities;
+using ECommerceApp.Domain.Repository;
 using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext;
+using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository;
+using ECommerceApp.Services.CategoryTypeService.Services.Concrete;
 using ECommerceApp.Services.UserAccountService.Identity.Concrete;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Services.UserAccountService.Services.Concrete;
@@ -40,6 +43,8 @@ namespace E_CommerceApp
             JwtOptions jwtSettings = Configuration.GetSection("JwtOptions").Get<JwtOptions>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICategoryTypeService, CategoryTypeService>();
+            services.AddScoped<ICategoryTypeRepository, EFCategoryTypeRepository>();
             services.AuthenticationJwtSettings(jwtSettings);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

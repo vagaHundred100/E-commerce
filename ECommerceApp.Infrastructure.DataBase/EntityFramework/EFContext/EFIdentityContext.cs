@@ -16,11 +16,17 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext
 
         #region DbSet's
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<CategoryType> CategoryTypes { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);//keys of Identity tables are mapped in OnModelCreating method of IdentityDbContext
+            modelBuilder.Entity<CategoryType>()
+                .HasMany(c => c.Children)
+                .WithOne(c => c.Parent)
+                .HasForeignKey(p => p.ParentId);
+
             modelBuilder.SeedDeafultData();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using ECommerceApp.Services.UserAccountService.DTOs;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Shared.SharedRequestResults.Base;
+using ECommerceApp.Shared.SharedRequestResults.SharedConstants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 [ApiController]
 [Route("Admin/[controller]")]
+[Authorize(Roles = AllowedRolesForController.ADMIN)]
 public class AccountManegmentController : Controller
 {
     private readonly IAccountService _accountService;
