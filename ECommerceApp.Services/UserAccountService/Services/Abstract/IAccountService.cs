@@ -7,7 +7,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
 {
     public interface IAccountService
     {
-        Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel);
+        Task<DefaultResult> RegisterUser(RegisterDTO userRegisterViewModel);
         Task<DataResult<string>> Login(LoginDTO loginData);
         //DataResult<List<UserDropDownDTO>> AllUsersForDropDown();
         //PagedDataResult<List<UserDropDownDTO>> AllUsersForDropDownPaged(PaginationSettings paginationSettings);

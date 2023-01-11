@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ECommerceApp.Services.UserAccountService.DTOs
 {
-    public class UserCreateDTO
+    public class RegisterDTO
     {
         [Required]
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
+        public string RepeatedPassword { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

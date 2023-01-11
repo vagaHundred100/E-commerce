@@ -6,9 +6,7 @@ using System.Data;
 using System.Threading.Tasks;
 
 
-[Authorize(Roles = "Admin")]
-[ApiController]
-[Route("[controller]")]
+
 public class AccountController : Controller
 {
     private readonly IAccountService _accountService;
@@ -16,6 +14,14 @@ public class AccountController : Controller
     public AccountController(IAccountService service)
     {
         _accountService = service;
+    }
+
+
+
+    [AllowAnonymous]
+    public IActionResult ResetPassword()
+    {
+        return View();
     }
 
     [HttpPost("ResetPassword")]
@@ -32,7 +38,14 @@ public class AccountController : Controller
 
     }
 
-    [HttpPost("ChangePasssword")]
+    [AllowAnonymous]
+    public IActionResult ChangePassword()
+    {
+       return View();
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
     public async Task<IActionResult> ChangePassword(UserChangePasswordDTO model)
     {
         if (ModelState.IsValid)
@@ -45,7 +58,13 @@ public class AccountController : Controller
     }
 
     [AllowAnonymous]
-    [HttpPost("Login")]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
     public async Task<IActionResult> Login(LoginDTO model)
     {
         if (ModelState.IsValid)
@@ -54,13 +73,18 @@ public class AccountController : Controller
             return StatusCode(200, response);
         }
 
-        return BadRequest();
+        return View(model);
     }
 
+    [AllowAnonymous]
+    public IActionResult Register()
+    {
+        return View();
+    }
 
     [AllowAnonymous]
-    [HttpPost("Register")]
-    public async Task<IActionResult> Register(UserCreateDTO model)
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterDTO model)
     {
         if (ModelState.IsValid)
         {

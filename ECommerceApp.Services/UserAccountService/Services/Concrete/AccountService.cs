@@ -66,10 +66,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             return new DefaultResult();
         }
 
-        public async Task<DefaultResult> RegisterUser(UserCreateDTO userRegisterViewModel)
+        public async Task<DefaultResult> RegisterUser(RegisterDTO userRegisterViewModel)
         {
             var user = new AppUser();
-            user = _mapper.Map<UserCreateDTO, AppUser>(userRegisterViewModel, user);
+            user = _mapper.Map<RegisterDTO, AppUser>(userRegisterViewModel, user);
             var result = await _userManager.CreateAsync(user, userRegisterViewModel.Password);
 
             if (!result.Succeeded)
