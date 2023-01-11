@@ -1,24 +1,23 @@
 ﻿using ECommerceApp.Services.UserAccountService.DTOs;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Threading.Tasks;
+//https://www.c-sharpcorner.com/article/how-to-use-session-in-asp-net-core/
 
+//https://asp.mvc-tutorial.com/httpcontext/cookies/
 
-
+//[Authorize]
 public class AccountController : Controller
 {
     private readonly IAccountService _accountService;
-
     public AccountController(IAccountService service)
     {
         _accountService = service;
     }
-
-
-
-    [AllowAnonymous]
+   // [AllowAnonymous]
     public IActionResult ResetPassword()
     {
         return View();
@@ -31,7 +30,6 @@ public class AccountController : Controller
         {
             var response = await _accountService.ResetPassword(model);
             return StatusCode(200, response);
-
         }
 
         return BadRequest();
@@ -41,7 +39,7 @@ public class AccountController : Controller
     [AllowAnonymous]
     public IActionResult ChangePassword()
     {
-       return View();
+        return View();
     }
 
     [AllowAnonymous]
@@ -70,13 +68,14 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var response = await _accountService.Login(model);
+            HttpContext.Response.Cookies.Append("jwt", response.Data);
             return StatusCode(200, response);
         }
 
         return View(model);
     }
 
-    [AllowAnonymous]
+   // [AllowAnonymous]
     public IActionResult Register()
     {
         return View();
@@ -95,5 +94,3 @@ public class AccountController : Controller
         return BadRequest();
     }
 }
-
-

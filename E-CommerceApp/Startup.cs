@@ -7,6 +7,7 @@ using ECommerceApp.Services.CategoryTypeService.Services.Concrete;
 using ECommerceApp.Services.UserAccountService.Identity.Concrete;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Services.UserAccountService.Services.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,11 +35,13 @@ namespace E_CommerceApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);//You can set Time   
+            });
             string conn = Configuration.GetConnectionString("Default");
             services.AddDbContext<EFIdentityContext>(options => options.UseSqlServer(conn, b => b.MigrationsAssembly("E-CommerceApp")));
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<EFIdentityContext>();
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.Configure<JwtOptions>(Configuration.GetSection("JwtOptions"));
             JwtOptions jwtSettings = Configuration.GetSection("JwtOptions").Get<JwtOptions>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
@@ -63,9 +66,9 @@ namespace E_CommerceApp
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
 

@@ -9,6 +9,7 @@ using ECommerceApp.Shared.SharedRequestResults.Base;
 using ECommerceApp.Shared.SharedRequestResults.SharedEnum;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -290,6 +291,8 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             {
                 var userClaimOptions = _mapper.Map<UserClaimsOptions>(user);
                 var roles = await _userManager.GetRolesAsync(user);
+
+               
                 return _jwtTokenService.GenerateJwt(userClaimOptions, roles, _jwtOptions);
             }
 
