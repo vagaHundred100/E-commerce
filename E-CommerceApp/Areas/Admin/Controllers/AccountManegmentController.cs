@@ -1,16 +1,14 @@
-﻿using ECommerceApp.Services.UserAccountService.DTOs;
-using ECommerceApp.Services.UserAccountService.Services.Abstract;
+﻿using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Shared.SharedRequestResults.Base;
 using ECommerceApp.Shared.SharedRequestResults.SharedConstants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 [ApiController]
 [Route("Admin/[controller]")]
-[Authorize(Roles = AllowedRolesForController.ADMIN)]
+//[Authorize(Roles = AllowedRolesForController.ADMIN)]
 public class AccountManegmentController : Controller
 {
     private readonly IAccountService _accountService;
@@ -26,9 +24,7 @@ public class AccountManegmentController : Controller
         {
             var response = await _accountService.AssignUserToRole(UserId, roleId);
             return StatusCode(200, response);
-
         }
-
         return BadRequest();
     }
 
@@ -81,7 +77,6 @@ public class AccountManegmentController : Controller
     [HttpPost("GettAllUsers")]
     public IActionResult GettAllUsers(PaginationSettings settings)
     {
-
         if (ModelState.IsValid)
         {
             var response = _accountService.AllUsers(settings);
@@ -91,5 +86,3 @@ public class AccountManegmentController : Controller
         return BadRequest();
     }
 }
-
-
