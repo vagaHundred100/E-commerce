@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_CommerceApp.Controllers
+namespace E_CommerceApp.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    [Area("Admin")]
+    public class Admin1Controller : Controller
     {
         public IActionResult Index()
         {
