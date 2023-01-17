@@ -258,7 +258,6 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                              Email = u.Email
                          })
                    .AsEnumerable()
-                   .OrderByPropertyName(settings.SortField, settings.OrderMethod)
                    .ToList();
 
 
