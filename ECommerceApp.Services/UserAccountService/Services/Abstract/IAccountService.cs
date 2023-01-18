@@ -28,5 +28,6 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
         DataResult<List<KeyValuePair<string, int>>> UserTypes();
         Task<DefaultResult> ResetPassword(UserResetPasswordDTO userChangePasswordDTO);
         Task<DefaultResult> ChangePassword(UserChangePasswordDTO userChangePasswordDTO);
+        DataResult<List<string>> AllRoles();
     }
 }

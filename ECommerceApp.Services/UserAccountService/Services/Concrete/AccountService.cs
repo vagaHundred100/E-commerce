@@ -296,5 +296,11 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             }
 
         }
+
+        public DataResult<List<string>> AllRoles()
+        {
+            var roles = _roleManager.Roles.Select(c => c.Name).ToList();
+            return new DataResult<List<string>>(roles);
+        }
     }
 }
