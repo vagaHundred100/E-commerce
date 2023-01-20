@@ -68,8 +68,7 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var response = await _accountService.Login(model);
-            HttpContext.Response.Cookies.Append("jwt", response.Data);
-            return StatusCode(200, response);
+            return RedirectToAction("Index", "Home");
         }
 
         return View(model);
@@ -88,7 +87,7 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var response = await _accountService.RegisterUser(model);
-            return StatusCode(200, response);
+            return RedirectToAction("Index", "Home");
         }
 
         return BadRequest();

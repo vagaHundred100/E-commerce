@@ -28,10 +28,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
         Task<DefaultResult> CreateRole(RoleDTO roleDTO);
         Task<DataResult<AppRole>> GetRoleById(int id);
         Task<DefaultResult> UpdateRole(int id, RoleDTO roleDTO);
-        Task<DefaultResult> DeleteRole(RoleDTO roleDTO);
+        Task<DefaultResult> DeleteRole(int id);
         DataResult<List<KeyValuePair<string, int>>> UserTypes();
         Task<DefaultResult> ResetPassword(UserResetPasswordDTO userChangePasswordDTO);
         Task<DefaultResult> ChangePassword(UserChangePasswordDTO userChangePasswordDTO);
-        DataResult<List<string>> AllRoles();
+        DataResult<List<AppRole>> AllRoles();
     }
 }

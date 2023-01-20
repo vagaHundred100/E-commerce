@@ -245,9 +245,9 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             var response = await _roleManager.UpdateAsync(role);
             return new DefaultResult(response.Succeeded);
         }
-        public async Task<DefaultResult> DeleteRole(RoleDTO roleDTO)
+        public async Task<DefaultResult> DeleteRole(int id)
         {
-            var role = await _roleManager.FindByIdAsync(RoleDTO.Id.ToString());
+            var role = await _roleManager.FindByIdAsync(id.ToString());
             var result = await _roleManager.DeleteAsync(role);
             return new DefaultResult(result.Succeeded);
         }
@@ -316,10 +316,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
 
         }
 
-        public DataResult<List<string>> AllRoles()
+        public DataResult<List<AppRole>> AllRoles()
         {
-            var roles = _roleManager.Roles.Select(c => c.Name).ToList();
-            return new DataResult<List<string>>(roles);
+            var roles = _roleManager.Roles.ToList();
+            return new DataResult<List<AppRole>>(roles);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿@model List<ECommerceApp.Services.UserAccountService.DTOs.RoleDTO>
 
 <div id="content">
 
@@ -31,13 +31,13 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach (var roleName in Model)
+                            @foreach (var role in @Model)
                             {
                                 <tr>
-                                    <td>@roleName</td>
+                                    <td>@role.Name</td>
                                     <td>
-                                        <button style="background-color: #4e73df; color: #fff; border: none; height: 40px; border-radius: 5px; width: 90px;">edit</button>
-                                        <button style="background-color: red; color: #fff; border: none; height: 40px; border-radius: 5px; width: 90px;">delete</button>
+                                        <a asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id">edit</a>
+                                        <a  asp-controller="Role" asp-action="Delete" asp-route-id="@role.Id">delete</a>
                                     </td>
                                 </tr>
                             }

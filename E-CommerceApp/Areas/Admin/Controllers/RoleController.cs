@@ -2,6 +2,7 @@
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace E_CommerceApp.Areas.Admin.Controllers
@@ -19,8 +20,15 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         // GET: RoleController
         public ActionResult Index()
         {
+            var roleDTOs = new List<RoleDTO>();
             var response = _accountService.AllRoles();
-            return View(response.Data);
+            var roles = response.Data;
+            foreach (var role in roles)
+            {
+                var roleDTO = new RoleDTO { Id = role.Id, Name = role.Name };
+                roleDTOs.Add(roleDTO);
+            }
+            return View(roleDTOs);
         }
 
         // GET: RoleController/Details/5
@@ -44,16 +52,19 @@ namespace E_CommerceApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _accountService.CreateRole(roleDTO);
-                return  RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return BadRequest();
         }
 
         // GET: RoleController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var result = await _accountService.GetRoleById(id);
+            var role = result.Data;
+            var roleDTO = new RoleDTO { Name = role.Name };
+            return View(roleDTO);
         }
 
         // POST: RoleController/Edit/5
@@ -63,7 +74,7 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _accountService.UpdateRole(id,roleDTO);
+                var response = await _accountService.UpdateRole(id, roleDTO);
                 return RedirectToAction("Index");
             }
 
@@ -80,13 +91,13 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         }
 
         // POST: RoleController/Delete/5
-        [HttpPost]
+        [HttpPost("PostDelete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostDelete(RoleDTO roleDTO)
+        public async Task<IActionResult> PostDelete(int id)
         {
             if (ModelState.IsValid)
             {
-                var response = await _accountService.DeleteRole(roleDTO);
+                var response = await _accountService.DeleteRole(id);
                 return RedirectToAction("Index");
             }
 
