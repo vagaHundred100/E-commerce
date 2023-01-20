@@ -225,10 +225,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             return new DefaultResult();
         }
 
-        public async Task<DefaultResult> CreateRole(string roleName)
+        public async Task<DefaultResult> CreateRole(RoleDTO roleDTO)
         {
             AppRole role = new AppRole();
-            role.Name = roleName;
+            role.Name = roleDTO.Name;
             var result = await _roleManager.CreateAsync(role);
 
             if (!result.Succeeded)
@@ -236,6 +236,25 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                 return new DefaultResult(result.Succeeded);
             }
             return new DefaultResult();
+        }
+
+        public async Task<DefaultResult> UpdateRole(int id, RoleDTO roleDTO)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            role.Name = roleDTO.Name;
+            var response = await _roleManager.UpdateAsync(role);
+            return new DefaultResult(response.Succeeded);
+        }
+        public async Task<DefaultResult> DeleteRole(RoleDTO roleDTO)
+        {
+            var role = await _roleManager.FindByIdAsync(RoleDTO.Id.ToString());
+            var result = await _roleManager.DeleteAsync(role);
+            return new DefaultResult(result.Succeeded);
+        }
+        public async Task<DataResult<AppRole>> GetRoleById(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            return new DataResult<AppRole>(role);
         }
 
         public DataResult<List<KeyValuePair<string, int>>> UserTypes()
@@ -291,7 +310,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                 var userClaimOptions = _mapper.Map<UserClaimsOptions>(user);
                 var roles = await _userManager.GetRolesAsync(user);
 
-               
+
                 return _jwtTokenService.GenerateJwt(userClaimOptions, roles, _jwtOptions);
             }
 

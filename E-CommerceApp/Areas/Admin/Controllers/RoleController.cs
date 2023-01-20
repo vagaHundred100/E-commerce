@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Services.UserAccountService.Services.Abstract;
+﻿using ECommerceApp.Services.UserAccountService.DTOs;
+using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -31,18 +32,18 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         // GET: RoleController/Create
         public ActionResult Create()
         {
-            string roleName = "";
-            return View(roleName);
+            var role = new RoleDTO();
+            return View(role);
         }
 
         // POST: RoleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string RoleName)
+        public async Task<IActionResult> Create(RoleDTO roleDTO)
         {
             if (ModelState.IsValid)
             {
-                var response = await _accountService.CreateRole(RoleName);
+                var response = await _accountService.CreateRole(roleDTO);
                 return  RedirectToAction("Index");
             }
 
@@ -58,37 +59,38 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         // POST: RoleController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, RoleDTO roleDTO)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _accountService.UpdateRole(id,roleDTO);
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return BadRequest();
         }
 
         // GET: RoleController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var result = await _accountService.GetRoleById(id);
+            var roleDTO = new RoleDTO() { Id = id, Name = result.Data.Name };
+            return View(roleDTO);
         }
 
         // POST: RoleController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> PostDelete(RoleDTO roleDTO)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _accountService.DeleteRole(roleDTO);
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return BadRequest();
         }
     }
 }

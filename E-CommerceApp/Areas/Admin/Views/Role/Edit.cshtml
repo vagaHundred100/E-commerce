@@ -1,10 +1,12 @@
 ﻿@model ECommerceApp.Services.UserAccountService.DTOs.RoleDTO
 
+<h1>Edit user</h1>
+
 <div class="container-fluid">
     <div class="row">
         <h2>Add</h2>
     </div>
-    <form method="post" asp-action="Create">
+    <form method="post" asp-action="Edit">
         <div class="row d-flex flex-column">
             <label for="name">Role Name</label>
             <input asp-for="Name" style="width: 400px; height: 40px; outline: none; border-radius: 5px;" type="text">
@@ -16,8 +18,3 @@
     </form>
 
 </div>
-
-
-
-
-

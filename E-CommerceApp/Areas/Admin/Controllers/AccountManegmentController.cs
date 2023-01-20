@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Services.UserAccountService.Services.Abstract;
+﻿using ECommerceApp.Services.UserAccountService.DTOs;
+using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Shared.SharedRequestResults.Base;
 using ECommerceApp.Shared.SharedRequestResults.SharedConstants;
 using Microsoft.AspNetCore.Authorization;
@@ -63,11 +64,11 @@ public class AccountManegmentController : Controller
     }
 
     [HttpGet("CreateRole")]
-    public async Task<IActionResult> CreateRole(string RoleName)
+    public async Task<IActionResult> CreateRole(RoleDTO roleDTO) 
     {
         if (ModelState.IsValid)
         {
-            var response = await _accountService.CreateRole(RoleName);
+            var response = await _accountService.CreateRole(roleDTO);
             return StatusCode(200, response);
         }
 

@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Services.UserAccountService.DTOs;
+﻿using ECommerceApp.Domain.Entities;
+using ECommerceApp.Services.UserAccountService.DTOs;
 using ECommerceApp.Shared.SharedRequestResults.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,7 +25,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
         //Task<DataResult<List<UserRolesViewDTO>>> UserRoles(int userId);
         Task<DefaultResult> RemoveUserFromRole(int userId, int roleId);
         //Task<DefaultResult> EditUser(UserUpdateDTO userEditModel);
-        Task<DefaultResult> CreateRole(string roleName);
+        Task<DefaultResult> CreateRole(RoleDTO roleDTO);
+        Task<DataResult<AppRole>> GetRoleById(int id);
+        Task<DefaultResult> UpdateRole(int id, RoleDTO roleDTO);
+        Task<DefaultResult> DeleteRole(RoleDTO roleDTO);
         DataResult<List<KeyValuePair<string, int>>> UserTypes();
         Task<DefaultResult> ResetPassword(UserResetPasswordDTO userChangePasswordDTO);
         Task<DefaultResult> ChangePassword(UserChangePasswordDTO userChangePasswordDTO);
