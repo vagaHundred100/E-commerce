@@ -138,16 +138,16 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
 
         }
 
-        public async Task<DefaultResult> AssignUserToRole(int userId, int roleId)
+        public async Task<DefaultResult> AssignUserToRole(UserRoleDTO userRole)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userRole.UserId.ToString());
 
             if (user == null)
             {
                 return new DefaultResult(false);
             }
 
-            var result = await _userManager.AddToRoleAsync(user, roleId.ToString());
+            var result = await _userManager.AddToRoleAsync(user, userRole.RoleId.ToString());
 
             if (!result.Succeeded)
             {
@@ -271,6 +271,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                    .Select(u =>
                          new UserViewDTO
                          {
+                             Id = u.Id,
                              UserName = u.UserName,
                              FirstName = u.FirstName,
                              LastName = u.LastName,

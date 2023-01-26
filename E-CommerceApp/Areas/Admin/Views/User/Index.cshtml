@@ -16,6 +16,7 @@
                         <th>Lastname</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -24,6 +25,7 @@
                         <th>Lastname</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -34,6 +36,9 @@
                             <td>@Model[i].LastName</td>
                             <td>@Model[i].UserName</td>
                             <td>@Model[i].Email</td>
+                            <td>
+                                <a asp-action="AssignUserToRole" asp-route-id="@Model[i].Id">Add Role</a>
+                            </td>
                         </tr>
                     }
 

@@ -19,11 +19,11 @@ public class AccountManegmentController : Controller
         _accountService = service;
     }
 
-    public async Task<IActionResult> AssignUserToRole(int UserId, int roleId)
+    public async Task<IActionResult> AssignUserToRole(UserRoleDTO userRole)
     {
         if (ModelState.IsValid)
         {
-            var response = await _accountService.AssignUserToRole(UserId, roleId);
+            var response = await _accountService.AssignUserToRole(userRole);
             return StatusCode(200, response);
         }
         return BadRequest();

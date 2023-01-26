@@ -18,7 +18,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
         Task<DefaultResult> DeactivateUser(int userId);
         Task<DefaultResult> ActivateUser(int userId);
         Task<DefaultResult> DeactivateRole(int roleId);
-        Task<DefaultResult> AssignUserToRole(int userId, int roleId);
+        Task<DefaultResult> AssignUserToRole(UserRoleDTO userRole);
         Task<DefaultResult> AssignUserToRoles(int userId, List<int> roleIds);
         Task<DefaultResult> UpdateUserRoles(int userId, List<int> roleIds);
         Task<DefaultResult> SelectApplicationLanguage(int userId, int appLangId);
