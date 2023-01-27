@@ -29,11 +29,11 @@ public class AccountManegmentController : Controller
         return BadRequest();
     }
 
-    public async Task<IActionResult> AssignUserToRoles(int UserId, List<int> roleIds)
+    public async Task<IActionResult> AssignUserToRoles(int UserId, List<string> roles)
     {
         if (ModelState.IsValid)
         {
-            var response = await _accountService.AssignUserToRoles(UserId, roleIds);
+            var response = await _accountService.AssignUserToRoles(UserId, roles);
             return StatusCode(200, response);
         }
 
@@ -52,11 +52,11 @@ public class AccountManegmentController : Controller
         return BadRequest();
     }
 
-    public async Task<IActionResult> RemoveUserFromRole(int userId, int roleId)
+    public async Task<IActionResult> RemoveUserFromRole(UserRoleDTO userRole)
     {
         if (ModelState.IsValid)
         {
-            var response = await _accountService.RemoveUserFromRole(userId, roleId);
+            var response = await _accountService.RemoveUserFromRole(userRole);
             return StatusCode(200, response);
         }
 
@@ -64,11 +64,11 @@ public class AccountManegmentController : Controller
     }
 
     [HttpGet("CreateRole")]
-    public async Task<IActionResult> CreateRole(RoleDTO roleDTO) 
+    public async Task<IActionResult> CreateRole(string role) 
     {
         if (ModelState.IsValid)
         {
-            var response = await _accountService.CreateRole(roleDTO);
+            var response = await _accountService.CreateRole(role);
             return StatusCode(200, response);
         }
 

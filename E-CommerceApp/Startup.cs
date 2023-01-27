@@ -47,7 +47,7 @@ namespace E_CommerceApp
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICategoryTypeService, CategoryTypeService>();
-            services.AddScoped<ICategoryTypeRepository, EFCategoryTypeRepository>();
+            services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();
             services.AuthenticationJwtSettings(jwtSettings);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

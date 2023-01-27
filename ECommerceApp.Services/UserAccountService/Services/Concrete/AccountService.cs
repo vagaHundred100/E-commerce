@@ -147,7 +147,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                 return new DefaultResult(false);
             }
 
-            var result = await _userManager.AddToRoleAsync(user, userRole.RoleId.ToString());
+            var result = await _userManager.AddToRoleAsync(user, userRole.Role);
 
             if (!result.Succeeded)
             {
@@ -157,7 +157,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             return new DefaultResult();
         }
 
-        public async Task<DefaultResult> AssignUserToRoles(int userId, List<int> roleIds)
+        public async Task<DefaultResult> AssignUserToRoles(int userId, List<string> roles)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
@@ -166,13 +166,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
                 return new DefaultResult(false);
             }
 
-            foreach (var roleId in roleIds)
+            var result = await _userManager.AddToRolesAsync(user, roles);
+            if (!result.Succeeded)
             {
-                var result = await _userManager.AddToRoleAsync(user, roleId.ToString());
-                if (!result.Succeeded)
-                {
-                    return new DefaultResult(result.Succeeded);
-                }
+                return new DefaultResult(result.Succeeded);
             }
 
             return new DefaultResult();
@@ -206,16 +203,16 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             throw new System.NotImplementedException();
         }
 
-        public async Task<DefaultResult> RemoveUserFromRole(int userId, int roleId)
+        public async Task<DefaultResult> RemoveUserFromRole(UserRoleDTO userRole)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userRole.UserId.ToString());
 
             if (user == null)
             {
                 return new DefaultResult(false);
             }
 
-            var result = await _userManager.RemoveFromRoleAsync(user, roleId.ToString());
+            var result = await _userManager.RemoveFromRoleAsync(user, userRole.Role);
 
             if (!result.Succeeded)
             {
@@ -225,10 +222,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             return new DefaultResult();
         }
 
-        public async Task<DefaultResult> CreateRole(RoleDTO roleDTO)
+        public async Task<DefaultResult> CreateRole(string roleName)
         {
             AppRole role = new AppRole();
-            role.Name = roleDTO.Name;
+            role.Name = roleName;
             var result = await _roleManager.CreateAsync(role);
 
             if (!result.Succeeded)
@@ -322,5 +319,7 @@ namespace ECommerceApp.Services.UserAccountService.Services.Concrete
             var roles = _roleManager.Roles.ToList();
             return new DataResult<List<AppRole>>(roles);
         }
+
+
     }
 }

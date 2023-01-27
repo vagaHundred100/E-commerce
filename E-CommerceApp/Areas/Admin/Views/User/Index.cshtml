@@ -38,15 +38,17 @@
                             <td>@Model[i].Email</td>
                             <td>
                                 <a asp-action="AssignUserToRole" asp-route-id="@Model[i].Id">Add Role</a>
+                                <a asp-action="RemoveUserFromRole" asp-route-id="@Model[i].Id">Remove Role</a>
                             </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+
 
 <!-- /.container-fluid -->
 <!-- End of Main Content -->

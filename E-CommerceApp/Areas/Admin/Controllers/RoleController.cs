@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
+
 namespace E_CommerceApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -12,10 +14,14 @@ namespace E_CommerceApp.Areas.Admin.Controllers
     {
         private readonly IAccountService _accountService;
 
+
+
         public RoleController(IAccountService service)
         {
             _accountService = service;
         }
+
+
 
         // GET: RoleController
         public ActionResult Index()
@@ -31,32 +37,42 @@ namespace E_CommerceApp.Areas.Admin.Controllers
             return View(roleDTOs);
         }
 
+
+
         // GET: RoleController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
+
+
         // GET: RoleController/Create
         public ActionResult Create()
         {
-            var role = new RoleDTO();
-            return View(role);
+
+            return View();
         }
+
+
 
         // POST: RoleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RoleDTO roleDTO)
+        public async Task<IActionResult> Create(string role)
         {
             if (ModelState.IsValid)
             {
-                var response = await _accountService.CreateRole(roleDTO);
+                var response = await _accountService.CreateRole(role);
                 return RedirectToAction("Index");
             }
 
+
+
             return BadRequest();
         }
+
+
 
         // GET: RoleController/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -66,6 +82,8 @@ namespace E_CommerceApp.Areas.Admin.Controllers
             var roleDTO = new RoleDTO { Name = role.Name };
             return View(roleDTO);
         }
+
+
 
         // POST: RoleController/Edit/5
         [HttpPost]
@@ -78,8 +96,12 @@ namespace E_CommerceApp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+
+
             return BadRequest();
         }
+
+
 
         // GET: RoleController/Delete/5
         [HttpGet]
@@ -89,6 +111,8 @@ namespace E_CommerceApp.Areas.Admin.Controllers
             var roleDTO = new RoleDTO() { Id = id, Name = result.Data.Name };
             return View(roleDTO);
         }
+
+
 
         // POST: RoleController/Delete/5
         [HttpPost("PostDelete")]
@@ -100,6 +124,8 @@ namespace E_CommerceApp.Areas.Admin.Controllers
                 var response = await _accountService.DeleteRole(id);
                 return RedirectToAction("Index");
             }
+
+
 
             return BadRequest();
         }

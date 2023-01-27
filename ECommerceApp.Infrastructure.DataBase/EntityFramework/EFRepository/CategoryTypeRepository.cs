@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository
 {
-    public class EFCategoryTypeRepository : ICategoryTypeRepository
+    public class CategoryTypeRepository : ICategoryTypeRepository
     {
         protected readonly EFIdentityContext _contex;
 
-        public EFCategoryTypeRepository(EFIdentityContext context)
+        public CategoryTypeRepository(EFIdentityContext context)
         {
             _contex = context;
         }

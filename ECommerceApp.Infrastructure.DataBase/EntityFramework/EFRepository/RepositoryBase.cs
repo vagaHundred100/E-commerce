@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository
 {
     //https://www.learnentityframeworkcore5.com/relationship-in-ef-core
-    public class EFRepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
     {
         protected readonly EFIdentityContext repositoryContextBase;
-        public EFRepositoryBase(EFIdentityContext applicationIdentityContext)
+        public RepositoryBase(EFIdentityContext applicationIdentityContext)
         {
             repositoryContextBase = applicationIdentityContext;
         }

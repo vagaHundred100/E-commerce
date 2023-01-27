@@ -17,6 +17,9 @@ namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext
         #region DbSet's
         public DbSet<Announcement> Announcements { get; set; }
         public DbSet<CategoryType> CategoryTypes { get; set; }
+        public DbSet<Variation> Variations { get; set; }
+        public DbSet<VariationType> VariationTypes { get; set; }
+        public DbSet<Product> Products { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

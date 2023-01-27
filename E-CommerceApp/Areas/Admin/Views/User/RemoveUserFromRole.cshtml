@@ -1,12 +1,10 @@
 ﻿@model ECommerceApp.Services.UserAccountService.DTOs.UserRoleDTO
 
-
-
 <div class="container-fluid">
     <div class="row">
         <h2>Add</h2>
     </div>
-    <form method="post" asp-action="AssignUserToRole">
+    <form method="post" asp-action="RemoveUserFromRole">
         <div class="row d-flex flex-column">
             <label class="control-label"> Select Role</label>
             <select class="form-control" asp-for="Role" asp-items="@ViewBag.roles"></select>
@@ -16,3 +14,4 @@
             <button type="submit" style="width: 150px; height: 40px; border: none; border-radius: 5px; background-color: #4e73df; color: #fff;">Submit</button>
         </div>
     </form>
+</div>

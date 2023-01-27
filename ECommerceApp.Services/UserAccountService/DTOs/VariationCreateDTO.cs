@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ECommerceApp.Services.UserAccountService.DTOs
 {
-    public class UserRoleDTO
+    public class VariationCreateDTO
     {
-        public int UserId { get; set; }
-        public string Role { get; set; }
+
     }
 }

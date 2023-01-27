@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_CommerceApp.Migrations
 {
     [DbContext(typeof(EFIdentityContext))]
-    [Migration("20221127135156_MyFirstMigration4")]
-    partial class MyFirstMigration4
+    [Migration("20230127152157_CategoryMig")]
+    partial class CategoryMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,8 +77,8 @@ namespace E_CommerceApp.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "ed78554b-9dca-4eea-8833-6b5afe183f8d",
-                            CreateDate = new DateTime(2022, 11, 27, 17, 51, 55, 793, DateTimeKind.Local).AddTicks(5227),
+                            ConcurrencyStamp = "ba160a38-5571-4d09-b0a5-ea9e5f350128",
+                            CreateDate = new DateTime(2023, 1, 27, 19, 21, 56, 531, DateTimeKind.Local).AddTicks(1068),
                             Name = "ADMIN",
                             NormalizedName = "ADMIN",
                             Status = 1
@@ -168,19 +168,127 @@ namespace E_CommerceApp.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6dca9ad9-0d06-414f-96a9-bbda22b6cee1",
-                            CreateDate = new DateTime(2022, 11, 27, 17, 51, 55, 797, DateTimeKind.Local).AddTicks(7827),
+                            ConcurrencyStamp = "c41e55f9-c8d8-4abc-9374-056bcbd8eb77",
+                            CreateDate = new DateTime(2023, 1, 27, 19, 21, 56, 532, DateTimeKind.Local).AddTicks(2532),
                             Email = "ECommerceApp@ECommerceApp.net",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "qms@bestcomp.net",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK28c5pA0DetJYb+fF/MuDau+FQCSYL3H8Zgh4fq7GMLiXdbcAhAllfJcSB/WEEDIA==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGiUxR4BM7Yl3XFmVG7NYo3X55iDk53H9XVxK68aOXiCCavuCM3KROnCyq2ratAeZg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Status = 1,
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.CategoryType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("CategoryTypes");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryTypeId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.Variation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryTypeId");
+
+                    b.ToTable("Variations");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.VariationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VariationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariationId");
+
+                    b.ToTable("VariationTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -291,6 +399,48 @@ namespace E_CommerceApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.CategoryType", b =>
+                {
+                    b.HasOne("ECommerceApp.Domain.Entities.CategoryType", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("ECommerceApp.Domain.Entities.CategoryType", "CategoryType")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoryType");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.Variation", b =>
+                {
+                    b.HasOne("ECommerceApp.Domain.Entities.CategoryType", "CategoryType")
+                        .WithMany("Variations")
+                        .HasForeignKey("CategoryTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoryType");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.VariationType", b =>
+                {
+                    b.HasOne("ECommerceApp.Domain.Entities.Variation", "Variation")
+                        .WithMany("VariationTypes")
+                        .HasForeignKey("VariationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Variation");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("ECommerceApp.Domain.Entities.AppRole", null)
@@ -340,6 +490,20 @@ namespace E_CommerceApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.CategoryType", b =>
+                {
+                    b.Navigation("Children");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("Variations");
+                });
+
+            modelBuilder.Entity("ECommerceApp.Domain.Entities.Variation", b =>
+                {
+                    b.Navigation("VariationTypes");
                 });
 #pragma warning restore 612, 618
         }

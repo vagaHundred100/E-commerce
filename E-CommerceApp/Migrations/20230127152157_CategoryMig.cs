@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace E_CommerceApp.Migrations
 {
-    public partial class MyFirstMigration4 : Migration
+    public partial class CategoryMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,6 +66,28 @@ namespace E_CommerceApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CategoryTypes_CategoryTypes_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "CategoryTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,15 +196,82 @@ namespace E_CommerceApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    CategoryTypeId = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_CategoryTypes_CategoryTypeId",
+                        column: x => x.CategoryTypeId,
+                        principalTable: "CategoryTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Variations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryTypeId = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Variations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Variations_CategoryTypes_CategoryTypeId",
+                        column: x => x.CategoryTypeId,
+                        principalTable: "CategoryTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VariationTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VariationId = table.Column<int>(type: "int", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VariationTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VariationTypes_Variations_VariationId",
+                        column: x => x.VariationId,
+                        principalTable: "Variations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreateDate", "Name", "NormalizedName", "Status" },
-                values: new object[] { 1, "ed78554b-9dca-4eea-8833-6b5afe183f8d", new DateTime(2022, 11, 27, 17, 51, 55, 793, DateTimeKind.Local).AddTicks(5227), "ADMIN", "ADMIN", 1 });
+                values: new object[] { 1, "ba160a38-5571-4d09-b0a5-ea9e5f350128", new DateTime(2023, 1, 27, 19, 21, 56, 531, DateTimeKind.Local).AddTicks(1068), "ADMIN", "ADMIN", 1 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreateDate", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "6dca9ad9-0d06-414f-96a9-bbda22b6cee1", new DateTime(2022, 11, 27, 17, 51, 55, 797, DateTimeKind.Local).AddTicks(7827), "ECommerceApp@ECommerceApp.net", false, null, null, false, null, "qms@bestcomp.net", null, "AQAAAAEAACcQAAAAEK28c5pA0DetJYb+fF/MuDau+FQCSYL3H8Zgh4fq7GMLiXdbcAhAllfJcSB/WEEDIA==", null, false, "", 1, false, "admin" });
+                values: new object[] { 1, 0, "c41e55f9-c8d8-4abc-9374-056bcbd8eb77", new DateTime(2023, 1, 27, 19, 21, 56, 532, DateTimeKind.Local).AddTicks(2532), "ECommerceApp@ECommerceApp.net", false, null, null, false, null, "qms@bestcomp.net", "ADMIN", "AQAAAAEAACcQAAAAEGiUxR4BM7Yl3XFmVG7NYo3X55iDk53H9XVxK68aOXiCCavuCM3KROnCyq2ratAeZg==", null, false, "", 1, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -227,6 +316,26 @@ namespace E_CommerceApp.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryTypes_ParentId",
+                table: "CategoryTypes",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryTypeId",
+                table: "Products",
+                column: "CategoryTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Variations_CategoryTypeId",
+                table: "Variations",
+                column: "CategoryTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VariationTypes_VariationId",
+                table: "VariationTypes",
+                column: "VariationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -250,10 +359,22 @@ namespace E_CommerceApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "VariationTypes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Variations");
+
+            migrationBuilder.DropTable(
+                name: "CategoryTypes");
         }
     }
 }

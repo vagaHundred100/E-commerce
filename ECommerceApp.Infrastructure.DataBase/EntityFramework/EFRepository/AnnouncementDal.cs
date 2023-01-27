@@ -4,7 +4,7 @@ using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFContext;
 
 namespace ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository
 {
-    public class AnnouncementDal : EFRepositoryBase<Announcement>, IAnnouncementDal
+    public class AnnouncementDal : RepositoryBase<Announcement>, IAnnouncementDal
     {
         public AnnouncementDal(EFIdentityContext context) : base(context)
         {

@@ -18,5 +18,7 @@ namespace ECommerceApp.Domain.Entities
         [JsonIgnore] 
         public virtual CategoryType Parent { get; set; }
         public virtual ICollection<CategoryType> Children { get; set; }
+        public  ICollection<Variation> Variations { get; set; }
+        public  ICollection<Product> Products { get; set; }
     }
 }
