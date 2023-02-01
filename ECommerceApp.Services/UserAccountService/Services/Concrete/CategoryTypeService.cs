@@ -1,8 +1,10 @@
-﻿using ECommerceApp.Domain.Entities;
+using ECommerceApp.Domain.Entities;
 using ECommerceApp.Domain.Repository;
 using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository;
 using ECommerceApp.Services.UserAccountService.DTOs;
+using ECommerceApp.Services.UserAccountService.DTOs.Category;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
+using ECommerceApp.Shared.SharedRequestResults.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace ECommerceApp.Services.CategoryTypeService.Services.Concrete
             _repository = repository;
         }
 
-        public void AddCategory(CategoryPostDTO dto)
+        public DefaultResult Create(CategoryPostDTO dto)
         {
             CategoryType category = new CategoryType();
             category.Name = dto.Name;
@@ -35,26 +37,36 @@ namespace ECommerceApp.Services.CategoryTypeService.Services.Concrete
                 category.ParentId = dto.ParentId;
                 _repository.AddChild(category);
             }
+
+            return new DefaultResult();
         }
 
-        public List<CategoryType> GetAllCategories()
+        public DataResult<List<CategoryType>> GetAll()
         {
-            return _repository.GetAllCategories().ToList();
+            var categories =  _repository.GetAllCategories().ToList();
+            return new DataResult<List<CategoryType>>(categories);
         }
 
-        public List<CategoryType> GetAllSubCategories(int parentId)
+        public DataResult<List<CategoryType>> GetAllSubCategories(int parentId)
         {
             throw new NotImplementedException();
         }
 
-        public CategoryType GetCategoryType(int id)
+        public DataResult<CategoryType> Get(int id)
         {
-            return _repository.Get(id);
+            var response =  _repository.Get(id);
+            return new DataResult<CategoryType>(response);
         }
 
-        public void RemoveCategory()
+        public DefaultResult Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DefaultResult Update(CategoryTypeUpdateDTO updateDTO)
         {
             throw new NotImplementedException();
         }
     }
 }
+
