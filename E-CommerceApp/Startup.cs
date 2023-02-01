@@ -46,8 +46,16 @@ namespace E_CommerceApp
             JwtOptions jwtSettings = Configuration.GetSection("JwtOptions").Get<JwtOptions>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IAccountService, AccountService>();
+
             services.AddScoped<ICategoryTypeService, CategoryTypeService>();
             services.AddScoped<ICategoryTypeRepository, CategoryTypeRepository>();
+
+            services.AddScoped<IVariationTypeService,VariationTypeService>();
+            services.AddScoped<IVariationTypeRepository, VariationTypeRepository>();
+
+            services.AddScoped<IVariationService, VariationService>();
+            services.AddScoped<IVariationRepository, VariationRepository>();
+
             services.AuthenticationJwtSettings(jwtSettings);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
