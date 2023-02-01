@@ -1,5 +1,6 @@
-﻿using ECommerceApp.Domain.Entities;
+using ECommerceApp.Domain.Entities;
 using ECommerceApp.Services.UserAccountService.DTOs;
+using ECommerceApp.Shared.SharedRequestResults.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace ECommerceApp.Services.UserAccountService.Services.Abstract
 {
     public interface IVariationTypeService
     {
-        Variation Get(int id);
-        Variation GetAll();
-        void Create(VariationTypeCreateDTO variationDTO);
-        void Delete(int id);
-        void Update(VariationTypeUpdateDTO updateDTO);
+        DataResult<VariationType> Get(int id);
+        DataResult<List<VariationType>> GetAll(int variationId);
+        DefaultResult Delete(int id);
+        DefaultResult Create(VariationTypeCreateDTO variationDTO);
+        DefaultResult Update(VariationTypeUpdateDTO updateDTO);
     }
 }
