@@ -1,4 +1,4 @@
-﻿using ECommerceApp.Domain.Entities;
+using ECommerceApp.Domain.Entities;
 using ECommerceApp.Services.UserAccountService.DTOs;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Shared.SharedRequestResults.SharedConstants;
@@ -8,21 +8,20 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApp.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("Admin/[controller]")]
-    public class CategoryController : Controller
+    [Area("Admin")]
+    public class CategoryTypeController : Controller
     {
         protected readonly ICategoryTypeService _categoryService;
 
-        public CategoryController(ICategoryTypeService categoryService)
+        public CategoryTypeController(ICategoryTypeService categoryService)
         {
             _categoryService = categoryService;
         }
-        public IActionResult GetGategory(int id)
+        public IActionResult Get(int id)
         {
             if (ModelState.IsValid)
             {
-                var response =  _categoryService.GetCategoryType(id);
+                var response = _categoryService.Get(id);
                 return StatusCode(200, response);
 
             }
@@ -35,7 +34,7 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryService.AddCategory(postDTO);
+                _categoryService.Create(postDTO);
                 return StatusCode(200);
 
             }
@@ -47,7 +46,7 @@ namespace E_CommerceApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = _categoryService.GetAllCategories();
+                var data = _categoryService.GetAll();
                 return StatusCode(200, data);
 
             }
