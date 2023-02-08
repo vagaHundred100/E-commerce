@@ -1,6 +1,5 @@
 using ECommerceApp.Domain.Entities;
 using ECommerceApp.Services.UserAccountService.DTOs;
-using ECommerceApp.Services.UserAccountService.DTOs.Category;
 using ECommerceApp.Shared.SharedRequestResults.Base;
 using System;
 using System.Collections.Generic;

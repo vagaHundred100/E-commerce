@@ -2,7 +2,6 @@ using ECommerceApp.Domain.Entities;
 using ECommerceApp.Domain.Repository;
 using ECommerceApp.Infrastructure.DataBase.EntityFramework.EFRepository;
 using ECommerceApp.Services.UserAccountService.DTOs;
-using ECommerceApp.Services.UserAccountService.DTOs.Category;
 using ECommerceApp.Services.UserAccountService.Services.Abstract;
 using ECommerceApp.Shared.SharedRequestResults.Base;
 using System;

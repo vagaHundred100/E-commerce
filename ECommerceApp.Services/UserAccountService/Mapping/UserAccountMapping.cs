@@ -11,7 +11,12 @@ namespace ECommerceApp.Services.UserAccountService.Mapping
         public UserAccountMapping()
         {
             CreateMap<RegisterDTO, AppUser>().ReverseMap();
-            CreateMap<AppUser, UserClaimsOptions>();
+            CreateMap<Variation, VariationCreateDTO>();
+            CreateMap<Variation, VariationUpdateDTO>();
+            CreateMap<VariationType, VariationTypeCreateDTO>();
+            CreateMap<VariationType, VariationTypeUpdateDTO>();
+            CreateMap<CategoryType, CategoryTypeUpdateDTO>();
+            CreateMap<CategoryType, CategoryTypeUpdateDTO>();
         }
     }
 }

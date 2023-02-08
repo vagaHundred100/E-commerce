@@ -8,6 +8,6 @@ namespace ECommerceApp.Services.UserAccountService.DTOs
 {
     public class VariationTypeCreateDTO
     {
-
+        public string Name { get; set; }
     }
 }
