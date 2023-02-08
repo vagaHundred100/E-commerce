@@ -1,4 +1,6 @@
 ﻿using E_CommerceApp.Models;
+using ECommerceApp.Shared.SharedRequestResults.SharedConstants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,6 +8,7 @@ using System.Diagnostics;
 
 namespace E_CommerceApp.Controllers
 {
+    [Authorize(Roles = AllowedRolesForController.ADMIN_and_USER)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
